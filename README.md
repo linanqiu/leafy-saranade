@@ -61,7 +61,7 @@ Meet: 865695
 Runtime: 37682 ms
 ```
 
-The output shows the number of counts for cross (and meet), together with a histogram of the number of moves made before the ants cross (and meet). The histogram could be used to plot some interesting graphs (and find the minimum number of moves required), but that plotting is best left to some front end software. We shall not take care of that using ugly Java.
+The output shows the number of counts for cross (and meet) `Count: x`, together with a histogram of the number of moves made before the ants cross (and meet) `{x=a, y=b}` where `x` and `y` are number of moves and `a` and `b` are number of times those moves were produced as answers. The histogram could be used to plot some interesting graphs (and find the minimum number of moves required), but that plotting is best left to some front end software. We shall not take care of that using ugly Java.
 
 ## Outcomes
 
