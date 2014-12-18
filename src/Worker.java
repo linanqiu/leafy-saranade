@@ -37,7 +37,7 @@ public class Worker implements Callable<Result> {
 
     for (int i = 0; i < tries; i++) {
       chessboard.placeAnt(0, 0);
-      chessboard.placeAnt(7, 7);
+      chessboard.placeAnt(chessboard.getHeight() - 1, chessboard.getWidth() - 1);
       int moveReturn;
 
       while ((moveReturn = chessboard.moveAnts()) == Chessboard.NOTHING) {

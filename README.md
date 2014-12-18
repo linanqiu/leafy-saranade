@@ -19,13 +19,13 @@ javac SimulationMulti.java
 java SimulationMulti
 ```
 
-By default, it runs 4 threads with 250,000 tries per thread, with `backtrack = true`, `diagonal = true`.
+By default, it runs 8 threads with 125,000 tries per thread, with `backtrack = true`, `diagonal = true`.
 
 To edit the settings, edit the following lines in `SimulationMulti.java`
 
 ```java
-int threadCount = 4;
-int triesPerThread = 250000;
+int threadCount = 8;
+int triesPerThread = 125000;
 int height = 8;
 int width = 8;
 boolean backtrack = true;

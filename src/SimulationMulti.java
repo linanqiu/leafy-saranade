@@ -17,12 +17,12 @@ public class SimulationMulti {
   public static void main(String[] args) {
     long start = System.currentTimeMillis();
 
-    int threadCount = 4; // not optimized. machine specific.
-    int triesPerThread = 250000;
+    int threadCount = 8; // not optimized. machine specific.
+    int triesPerThread = 125000;
     int height = 8;
     int width = 8;
     boolean backtrack = false;
-    boolean diagonal = true;
+    boolean diagonal = false;
 
     ExecutorService executor = Executors.newFixedThreadPool(threadCount);
 

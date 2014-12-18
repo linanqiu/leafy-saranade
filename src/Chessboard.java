@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -16,7 +15,8 @@ public class Chessboard {
   public static final int MEET = 1;
   public static final int NOTHING = 0;
 
-  private int[] board;
+  // private int[] board;
+  // only used for debugging purposes. takes up memory.
   private int height;
   private int width;
   private int antCount;
@@ -42,15 +42,15 @@ public class Chessboard {
    *          allows diagonal movement
    */
   public Chessboard(int height, int width, boolean backtrack, boolean diagonal) {
-    board = new int[height * width];
+    // board = new int[height * width];
     this.height = height;
     this.width = width;
     this.backtrack = backtrack;
     this.diagonal = diagonal;
 
-    for (int i = 0; i < board.length; i++) {
-      board[i] = EMPTY;
-    }
+    // for (int i = 0; i < board.length; i++) {
+    // board[i] = EMPTY;
+    // }
 
     moveCount = 0;
     antCount = 0;
@@ -65,9 +65,9 @@ public class Chessboard {
     antCount = 0;
     antPositions = new HashMap<Integer, Integer>();
     moveCount = 0;
-    for (int i = 0; i < board.length; i++) {
-      board[i] = EMPTY;
-    }
+    // for (int i = 0; i < board.length; i++) {
+    // board[i] = EMPTY;
+    // }
   }
 
   /**
@@ -86,20 +86,20 @@ public class Chessboard {
     int boardPosition = x + y * width;
     antPositions.put(antCount, boardPosition);
     backtrackPositions.put(antCount, boardPosition);
-    board[boardPosition] = antCount;
+    // board[boardPosition] = antCount;
   }
 
-  public String toString() {
-    String boardString = "";
-    for (int i = 0; i < height; i++) {
-      String row = "";
-      for (int j = 0; j < width; j++) {
-        row = row + board[i * height + j] + "\t";
-      }
-      boardString = row + "\n" + boardString;
-    }
-    return boardString;
-  }
+  // public String toString() {
+  // String boardString = "";
+  // for (int i = 0; i < height; i++) {
+  // String row = "";
+  // for (int j = 0; j < width; j++) {
+  // row = row + board[i * height + j] + "\t";
+  // }
+  // boardString = row + "\n" + boardString;
+  // }
+  // return boardString;
+  // }
 
   /**
    * Moves both ants to a random next step and return result.
@@ -121,10 +121,9 @@ public class Chessboard {
       if (availableMoves.length > 0) {
         int chosenMove = (int) (Math.random() * availableMoves.length);
         int chosenPosition = availableMoves[chosenMove];
-        board[antPositions.get(ant)] = EMPTY;
-        board[chosenPosition] = ant;
+        // board[antPositions.get(ant)] = EMPTY;
+        // board[chosenPosition] = ant;
         antPositions.put(ant, chosenPosition);
-
         backtrackPositions.put(ant, previousPositions.get(ant));
       }
     }
@@ -149,7 +148,8 @@ public class Chessboard {
    * @return
    */
   private int[] availableMoves(int position, int backtrackPosition) {
-    ArrayList<Integer> moves = new ArrayList<Integer>();
+    int movesCount = 0;
+    int[] movesBig = new int[8];
 
     int x = position % width;
     int y = position / width;
@@ -162,12 +162,14 @@ public class Chessboard {
           if (!diagonal && Math.abs((x - tempX) * (y - tempY)) == 1) {
             // is diagonal
           } else {
-            if (consideredPosition < board.length && consideredPosition >= 0) {
+            if (consideredPosition < width * height && consideredPosition >= 0) {
               if (backtrack) {
-                moves.add(consideredPosition);
+                movesBig[movesCount] = consideredPosition;
+                movesCount++;
               } else {
                 if (consideredPosition != backtrackPosition) {
-                  moves.add(consideredPosition);
+                  movesBig[movesCount] = consideredPosition;
+                  movesCount++;
                 }
               }
             }
@@ -176,9 +178,9 @@ public class Chessboard {
       }
     }
 
-    int[] movesReturn = new int[moves.size()];
-    for (int i = 0; i < moves.size(); i++) {
-      movesReturn[i] = moves.get(i);
+    int[] movesReturn = new int[movesCount];
+    for (int i = 0; i < movesReturn.length; i++) {
+      movesReturn[i] = movesBig[i];
     }
 
     return movesReturn;
@@ -191,5 +193,13 @@ public class Chessboard {
    */
   public int getMoveCount() {
     return moveCount;
+  }
+
+  public int getHeight() {
+    return height;
+  }
+
+  public int getWidth() {
+    return width;
   }
 }
